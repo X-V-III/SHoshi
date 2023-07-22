@@ -1,0 +1,2 @@
+# SHoshi
+Simple gamba simulator
