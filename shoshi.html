@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto+Mono&display=swap"
+      rel="stylesheet"
+    />
+    <link href="style.css" rel="stylesheet" />
+    <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
+    <script src="script.js"></script>
+  </head>
+  <body>
+    <h1>I'm going to morb</h1>
+    <button id="button-switch-modes">CONCISE (Q)</button>
+    <div>
+      <button id="pull10x">PULL 10x (W)</button>
+      <button id="reset">RESET (S)</button>
+    </div>
+    <div class="infoContainer">
+      <div class="info">
+        <span id="infoPulls"></span>
+        <span id="infoPyro"></span>
+      </div>
+      <div class="info">
+        <span id="totalMikas"></span>
+        <span id="totalShoshi"></span>
+        <span id="totalWakamo"></span>
+        <span id="totalOther"></span>
+      </div>
+    </div>
+    <div id="pullsContainerConcise">
+      <ul id="pulls"></ul>
+      <ul id="details"></ul>
+    </div>
+    <div id="pullsContainerFancy" class="hidden">
+      <div id="fancy-pulls"></div>
+    </div>
+  </body>
+</html>
