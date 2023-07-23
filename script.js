@@ -67,6 +67,7 @@ $(document).ready(function () {
     node.innerHTML = "\t\t" + pulls.join(" ");
     document.getElementById("pulls").prepend(node);
 
+    // TODO rewrite with css animations
     // Triggering reflow to restart the transition
     void node.offsetWidth;
 
@@ -111,66 +112,66 @@ $(document).ready(function () {
   }
 
   async function handleTenPull() {
-    if (!inProcess) {
-      inProcess = true;
+    if (inProcess) return;
 
-      let threeStar = 0;
-      let hoshi = 0;
-      let mika = 0;
-      let wakamo = 0;
+    inProcess = true;
 
-      pullsTotal += 10;
-      pyroxeneSpent += 1200;
+    let threeStar = 0;
+    let hoshi = 0;
+    let mika = 0;
+    let wakamo = 0;
 
-      let pullData = {
-        pulls: [],
-      };
+    pullsTotal += 10;
+    pyroxeneSpent += 1200;
 
-      for (let i = 0; i < 10; i++) {
-        const randomValue = Math.random();
-        if (randomValue < threeStarChance) {
-          if (randomValue < mikaChance) {
-            mika += 1;
-            totalMikas += 1;
-            pullData["pulls"].push("M");
-          } else if (randomValue < mikaChance + shoshiChance) {
-            hoshi += 1;
-            totalShoshi += 1;
-            pullData["pulls"].push("H");
-          } else if (randomValue < mikaChance + shoshiChance + wakamoChance) {
-            wakamo += 1;
-            totalWakamo += 1;
-            pullData["pulls"].push("W");
-          } else {
-            threeStar += 1;
-            totalOtherThreeStars += 1;
-            pullData["pulls"].push("★");
-          }
+    let pullData = {
+      pulls: [],
+    };
+
+    for (let i = 0; i < 10; i++) {
+      const randomValue = Math.random();
+      if (randomValue < threeStarChance) {
+        if (randomValue < mikaChance) {
+          mika += 1;
+          totalMikas += 1;
+          pullData["pulls"].push("M");
+        } else if (randomValue < mikaChance + shoshiChance) {
+          hoshi += 1;
+          totalShoshi += 1;
+          pullData["pulls"].push("H");
+        } else if (randomValue < mikaChance + shoshiChance + wakamoChance) {
+          wakamo += 1;
+          totalWakamo += 1;
+          pullData["pulls"].push("W");
         } else {
-          pullData["pulls"].push("•");
+          threeStar += 1;
+          totalOtherThreeStars += 1;
+          pullData["pulls"].push("★");
         }
+      } else {
+        pullData["pulls"].push("•");
       }
-
-      pullData = {
-        ...pullData,
-        pullRange: pullsTotal - 10 + "-" + pullsTotal,
-        threeStar: threeStar,
-        hoshi: hoshi,
-        mika: mika,
-        wakamo: wakamo,
-      };
-
-      addListItem(pullData);
-      last10Pull = pullData;
-
-      if (mode === "FANCY") {
-        await show10Pull(pullData);
-      }
-
-      updateInfo();
-
-      inProcess = false;
     }
+
+    pullData = {
+      ...pullData,
+      pullRange: pullsTotal - 10 + "-" + pullsTotal,
+      threeStar: threeStar,
+      hoshi: hoshi,
+      mika: mika,
+      wakamo: wakamo,
+    };
+
+    addListItem(pullData);
+    last10Pull = pullData;
+
+    if (mode === "FANCY") {
+      await show10Pull(pullData);
+    }
+
+    updateInfo();
+
+    inProcess = false;
   }
 
   function handleReset() {
